@@ -120,14 +120,77 @@ Llevar a cabo lo siguiente:
 \subsection{Explicar cuáles son las características que debe tener un código para
   permitir llevar a cabo \textit{detección} o \textit{corrección} de errores}
 
+Recordemos los tipos de errores que podemos tener:
+\begin{itemize}
+\item De bit: Ocurre cuando únicamente un bit de una unidad de datos cambia. (Por
+  ejemplo, cambia de 0 a 1 o viceversa).
+\item De ráfaga: Este error ocurre cuando dos o más bits de la unidad de datos
+  han cambiado. En estos errores no necesariamente tenemos cambios en bits
+  consecutivos.
+\end{itemize}
+
+Para detectar estos errores, podemos hacer uso de la \textit{redundancia}, que,
+consiste en enviar dos veces cada unidad de datos, así podemos hacer una
+comparación bit a bit entre ambos datos y detectar si hay errores. Para aplicar
+esta técnica, podemos añadir al flujo de datos un grupo pequeño de bits al final
+de cada unidad, a estos los llamamos bits redundantes y los descartams una vez
+que se compruebe la integridad de la transmisión.
+
+Para la correción de errores, podemos hacerlo de dos maneras, si existe un error,
+podemos pedir al emisor que retransmita la información, la segunda opción es que
+el receptor los corrija.
+
 En este contexto, responde las siguientes preguntas:
 \begin{itemize}
 \item ¿Qué características debe tener un código para permitir la detección de
   errores de un máximo de n bits?
+
+  Como se explicó antes, podríamos mandar la información dos veces y compararla,
+  y así, detectar errores. Pero la más usada, como también se mencionó, es el uso
+  de los bits de redundancia. Lo que se requiere del código para permitir la
+  detección es que tenga $n$ bits más que nos ayuden a verificar si existe un
+  error. Esto haría el mensaje más largo, pero más sencillo el detectar si existe
+  o no un error.
+  
 \item ¿Qué características debe tener un código para permitir la corrección de
   errores de un máximo de n bits?
+
+  Para poder llevar a cabo la correción de errores, (Hablando en errores de un
+  bit) necesitamos saber cuál fue el bit que se invirtió y usamos los bits de
+  redundancia. ¿Cuántos bits de redundancia son necesarios?
+
+  Supongamos que usamos $r$ bits de redundancia, y que $m$ es la cantidad de bits
+  de nuestro mensaje, el mensaje a transmitir tiene una longitud de $m+r$ bits. Y
+  se necesita que los $r$ bits sean capaces de indicar todas las posibilidades de
+  error de 1 bit, incluyendo el no error (Esto son $m+r+1$ posibilidades).
+  Sabiendo esto, $r$ debe ser tal que $2^{r} \geq m+r+1$.
+
+  ¿Cómo corregir errores? R.W. Hamming desarrolló una técnica y se puede aplicar
+  a unidades de datos de cualquier longitud usando la relación entre bits de
+  datos y de redundancia. Lo que hace es colocar en ciertas posiciones entre $0$
+  y la longitud del mensaje los bits de redundancia. El receptor recibe esta
+  información, calcula valores para los bits de redundancia usando el mismo
+  conjunto que el emisor (Mismas posiciones). El resultado nos dice si ha habido
+  un error y en qué bit se ocasionó. De esta manera se puede solucionar.
+
+  ¿Qué pasa con errores de ráfaga? Lo antes mencionado es muy útil cuando se
+  trata de errores de un bit. Para solucionar los errores en ráfaga se puede usar
+  una implementación de Hamming, pero el número de bits de redundancia es muy
+  elevado.
+
+  
 \item ¿Cuál es el número mínimo de mensajes que deben enviar las dos partes para
   garantizar una comunicación libre de errores?
+
+  Si queremos minizar, podría realizarse con $n$ mensajes (El número de mensajes
+  en el que partimos el mensaje original para su transmisión). De esta manera, si
+  no hubiese errores, el emisor solo tendría que esperar cierto tiempo a que el
+  transmisor envié un mensaje de que hubo un error; Y, en caso de no llegar,
+  podría continuar mandando los siguientes mensajes.
+
+  El tiempo que definimos depende de cuánto tarde el receptor en verificar si
+  existen o no errores en el mensaje recibido.
+
 \end{itemize}
 
 \subsection{¿Cuáles son las tres características que componen al World Wide Web?}
@@ -183,7 +246,65 @@ Agregamos los bits redundantes... Como tenemos un polinomio de 17 bits, agregamo
 
 Procedemos a hacer la división aydándonos con un \textit{XOR}. No pondremos toda
 la división aquí, pero adjuntaremos una hoja de cálculo donde se puede revisar,
-sin embargo, vamos a notar los casos que creemos importantes.
+sin embargo, vamos a notar los casos que consideramos importantes.
+
+La primer fila representa los primeros ocho bits de nuestro mensaje, y la segunda
+representa los primeros ocho bits de nuestro polinomio. En la tercera anotamos el
+resultado de la aplicación de \texttt{XOR}.
+
+Vemos que, como el primer bit de la aplicación es 1, no podemos avanzar, por lo
+que volvemos a realizar la aplicación. La cuarta línea representa los primeros
+ocho bits de nuestro polinomio. Y la quinta línea representa el resultado de la
+segunda aplicación del \texttt{XOR}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{| c | c | c | c | c | c | c | c |}\hline
+    0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+  \end{tabular}
+  \caption{Aplicación de XOR.}
+\end{table}
+
+Como ya llegamos a tener un 0 como primer bit, (Recordemos que solo estamos
+usando los primeros ocho bits, en la hoja se encuentra con los 17 bits)
+procedemos a mover nuestro resultado hasta encontrar un 1, y aplicar el
+\texttt{XOR} con el polinomio. Como ahora nos sobra un bit, bajamos uno de
+nuestro mensaje.
+
+Continuando con la aplicación, nos encontramos con el siguiente escenario. La
+primer línea es el segmento al que le hemos aplicado \texttt{XOR}, y la segunda
+línea, nuestro polinomio. Podemos ver que nuestra tercera línea empieza con
+muchos 0's, por lo que a la siguiente aplicación, vamos a tener que posicionar
+nuestro polinomio para que coincida con el primer uno que encontremos.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{| c | c | c | c | c | c | c | c |}\hline
+    1 & 1 & 0 & 0 & 0 & 0 & 1 & 1 \\ \hline
+    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\ \hline
+  \end{tabular}
+  \caption{Aplicación de XOR.}
+\end{table}
+
+Después de hacer la aplicación a toda la cadena (mensaje y bits reduntantes),
+nuestro residuo (El CRC) es el siguiente \texttt{00011110 11101000}. Lo que sigue
+es adjuntar nuestro residuo con el mensaje original, esto quiere decir que
+nuestro mensaje qudaría de la siguiente manera: \texttt{01001000 01101111
+  01101100 01100001 00100000 01101101 01110101 01101110 01100100 01101111
+  10011011 10001101}. Este es el mensaje que se envía al receptor.
+
+Lo siguiente es volver a hacer una división (Aplicación de \texttt{XOR})
+siguiendo con el mismo polinomio y ahora usando el mensaje que recibe el
+receptor (Igual está en la hoja de cálculo esta división).
+
+Haciendo la aplicación al polinomio, vemos que el residuo nos queda
+\texttt{00000000 00000000}. Lo que quiere decir que el mensaje se envió y recibió
+sin errores.
 
 
 \subsection{Extra}
@@ -230,9 +351,11 @@ sin embargo, vamos a notar los casos que creemos importantes.
 
   https://www.welivesecurity.com/la-es/2016/12/07/codificacion-o-cifrado-diferencia/?fbclid=IwAR3R2RuHwb9grV7cKTuIXJOhtLbkw2AblOub1RrrMujh5nKns0tuqTv8fYE
 
-  https://www.cs.mcgill.ca/~rwest/wikispeedia/wpcd/wp/w/World_Wide_Web.htm
+  https://www.cs.mcgill.ca/~rwest/wikispeedia/wpcd/wp/w/World\_Wide\_Web.htm
 
   https://www.ecured.cu/Comprobaci%C3%B3n_de_redundancia_c%C3%ADclica
+
+  https://sites.google.com/site/sistemasdemultiplexado/arquitecturas-de-las-redes-de--comunicacin-caractersticas/8--deteccin-y-correccin-de-errores
 
 
 \end{thebibliography}
