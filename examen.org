@@ -1,12 +1,44 @@
 
 1. [-] Tarea de Redes
-   1. [ ] Parte teórica
+   1. [-] Parte teórica
+      1. [-] Memoria fotográfica
+         1. [X] Edificio
+         2. [ ] Inventario
+         3. [ ] tabla de rutas
+      2. [ ] Conexión de dispositivos
+         1. [ ] 
+         2. [ ] 
+         3. [ ] 
+         4. [ ] 
+         5. [ ] 
+         6. [ ] 
+         7. [ ] 
+      3. [ ] extra
    2. [-] Parte práctica
-      1. [ ] Considera una red..
-      2. [-] detección o corrección de errores
+      1. [-] Considera una red..
+         1. [X] 
+         2. [X] 
+         3. [ ] 
+         4. [X] 
+         5. [X] 
+         6. [ ] 
+         7. [ ] 
+         8. [ ] 
+         9. [ ] 
+         10. [ ] 
+         11. [ ] 
+             1. [ ] 
+             2. [ ] 
+             3. [ ] 
+             4. [ ] 
+             5. [ ] 
+             6. [ ] 
+             7. [ ] 
+             8. [ ] 
+      2. [X] detección o corrección de errores
          1. [X] a
-         2. [ ] b
-         3. [ ] c
+         2. [X] b
+         3. [X] c
       3. [X] WWW
       4. [X] CRC
       5. [X] Extra

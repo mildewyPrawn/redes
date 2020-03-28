@@ -60,33 +60,132 @@
 
 \section{Parte teórica}
 
+\subsection{Memoria fotográfica}
+\subsubsection{Edificio}
+Se decidió utilizar el edificio Poniente (P) de la facultad de Ciencias de la
+UNAM.
+
+\subsubsection{Descripción}
+El edificio cuenta con 4 pisos que son: Planta Baja, Primer Piso, Segundo Piso y
+el Sótano.
+\paragraph{Acometida} Es la parte de la instalación eléctrica que se construye
+desde las redes de distribución, hasta las instalaciones del usuario.
+
+\paragraph{Cuartos de telecomunicaciones} Área que es utilizada para el uso
+exclusivo de equipo asociado  con el sistema de cableado de telecomunicaciones.
+
+\paragraph{Racks} Racks de cada cuarto (Incluyendo Patch Panels) Estructura que
+permite sostener un dispositivo tecnológico. Tenemos en el cuarto de
+telecomunicaciones, y en los acces points de cada piso.
+
+\paragraph{Switches} Switches de acceso, distribución y core. Representan el
+perímetro de la red, por dónde entra o sale el tráfico de la red en cuestión.
+
+\paragraph{Ruteador} Dispositivo empleado a la hora de la interconexión de una
+red de ordenadores.
+
+El siguiente diagrama representa al edificio P, con algunas modificaciones para
+poder hacer ejemplos más claros.
+
+\begin{center}
+  \includegraphics[scale=.28]{edificioP.png}
+\end{center}
+
+\subsubsection{Inventario}
+Debido a que este un ejemplo meramente de demostración, es importante aclarar que
+la siguiente tabla no fue hecha con datos reales.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{| c | c | c | c | c | c | c | c |}\hline
+    0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
+    0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+  \end{tabular}
+  \caption{Inventario .}
+\end{table}
+
+
+\subsubsection{Tabla de rutas}
+
 \section{Parte práctica}
 \subsection{Considerar una red de la siguiente forma}
+\begin{center}
+  \includegraphics[scale=.75]{red.png}
+\end{center}
 Llevar a cabo lo siguiente:
 \begin{itemize}
 \item Asignar direcciones de un \textit{segmento privado de clase B} a los
   equipos de la Red A.
+
+  %% https://www.youtube.com/watch?v=H74s4_oJNYY
+  Recordemos los rangos de direcciones para utilizar con redes privadas:
+  \begin{itemize}
+  \item Clase A: 10.0.0.0 a 10.255.255.255 
+  \item Clase B: 172.16.0.0 a 172.31.255.255
+  \item Clase C: 192.168.0.0 a 192.168.255.255
+  \end{itemize}
+
+  Recordemos también lo que hace el comando \texttt{ifcfg: simplistic script
+    which replaces ifconfig IP management}, es una manera más simple de usar
+  \texttt{ifconfig}, que nos permite cambiar las direcciones.
+
+  La interfaz que vamos a cambiar es \texttt{eth1}.
+
+  Primero, necesitamos quitar la IP que tiene asignada en este momento. con el
+  siguiente comando \texttt{ifcfg eth1 inet 0.0.0.0 down}. Una vez hecho esto,
+  nuestra interfaz está abajo y podemos asginar otra dirección única como sigue:
+  \texttt{ifcfg eht1 inet xxx.x.x.x netmask xxx.xxx.xxx.x up}, con esto, solo
+  bastaría agregar las direcciones que se quieran. Hay que hacer este
+  pifcfg eth1 inet 0.0.0.0 down.
+  procedimiento para todos los equipos de la Red A.
+
+  Como son pocos los equipos, podemos hacerlo de uno por uno, pero si fueran
+  varios podríamos hacer uso de \texttt{DHCP}.
 \item Establecer la dirección del \textit{gateway} en la Red A.
+  
+  %% https://www.cisco.com/c/es_mx/support/docs/ip/routing-information-protocol-rip/16448-default.html
+  \texttt{ip default-gateway xxx.xx.xx.x}, donde xxx.xx.xx.x es la dirección que
+  se quiere establecer.
+  
 \item Indica la configuración de red que se debe usar en los equipos de la Red A
   (\textit{dirección de red, gateway, máscara de subred} y otros que consideres
   necesarios).
+
 \item Hacer uso de un \textit{segmento de red público de clase C} en los equipos
   de la Red B.
+
+  Al igual que en inciso anterior, esta es la clase que nos interesa  Clase C:
+  192.168.0.0 a 192.168.255.255, y usando el mismo comando (\texttt{ifcfg}) y la
+  misma idea, procederíamos a cambiar el segmento desactivando la interfaz que se
+  requiera, asignando el nuevo segmento, y finalmente levantarlo (\texttt{up}).
+  
 \item Establecer la dirección del \textit{gateway} en la Red B.
+
+  Igual que en el inciso anterior, hacemos uso del siguiente comando: \texttt{
+  ip default-gateway xxx.xx.xx.x}.
+  
 \item Indica la configuración de red que se debe usar en el servidor de la Red B
   (\textit{dirección de red, gateway, máscara de subred} y otros que consideres
   necesarios).
+  
 \item Asignar una \textit{dirección de red} a las interfaces correspondientes del
   \textit{router}, de acuerdo a las redes conectadas.
+  
 \item Incluir en el diagrama un \textit{DNS} en una red independiente, haciendo
   uso de un segmento de \textit{red de clase C}, con direcciones públicas.
+  
 \item Considerando que todos los clientes y servidores involucrados son equipos
   Linux, indica la forma en la que se debe establecer la configuración de
   \textit{red estática} y la configuración necesaria para llevar a cabo la
   \textit{resolución de nombres} en el sistema (archivos y comandos necesarios).
+  
 \item Por cuestiones de simplicidad, asignar a cada dispositivo  una
   \textit{dirección física de 4 números hexadecimales}.
-\item Explicar con detalle el procedimiento para llevar a cabo la coneción entre
+  
+\item Explicar con detalle el procedimiento para llevar a cabo la conexión entre
   una computadora de la Red A al servidor de la Red B, considerando lo siguiente:
   \begin{itemize}
   \item Se debe establecer el nombre del servidor con base en tu nombre y
@@ -177,7 +276,6 @@ En este contexto, responde las siguientes preguntas:
   trata de errores de un bit. Para solucionar los errores en ráfaga se puede usar
   una implementación de Hamming, pero el número de bits de redundancia es muy
   elevado.
-
   
 \item ¿Cuál es el número mínimo de mensajes que deben enviar las dos partes para
   garantizar una comunicación libre de errores?
