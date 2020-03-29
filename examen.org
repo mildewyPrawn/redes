@@ -42,9 +42,11 @@
          3. [X] c
       3. [X] WWW
       4. [X] CRC
-      5. [X] Extra
+      5. [-] Extra
          1. [X] A
-         2. [X] B
+         2. [ ] B
+   3. [ ] Extras
+      1. [ ] hacer el diagrama del rack
 
 
 
