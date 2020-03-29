@@ -1,6 +1,6 @@
 
 1. [-] Tarea de Redes
-   1. [-] Parte teórica
+   1. [X] Parte teórica
       1. [X] Memoria fotográfica
          1. [X] Edificio
          2. [X] Inventario
@@ -14,7 +14,7 @@
          6. [X] 
          7. [X] 
       3. [X] Consideraciones
-      4. [ ] extra
+      4. [X] extra
    2. [-] Parte práctica
       1. [-] Considera una red..
          1. [X] 
