@@ -5,10 +5,10 @@
          1. [X] Edificio
          2. [X] Inventario
          3. [X] tabla de rutas
-      2. [-] Conexión de dispositivos
+      2. [X] Conexión de dispositivos
          1. [X] 
          2. [X] 
-         3. [ ] 
+         3. [X] 
          4. [X] 
          5. [X] 
          6. [X] 
