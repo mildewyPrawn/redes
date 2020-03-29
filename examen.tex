@@ -87,8 +87,14 @@ red de ordenadores.
 El siguiente diagrama representa al edificio P, con algunas modificaciones para
 poder hacer ejemplos más claros.
 
+Los cuadrados chiquitos que engloban computadoras, represenatan salones, y los
+rectángulos horizontales, representan los pisos del edificio.
+
+Para las VLAN, se usararon las configuraciones desde el \texttt{CLI} de los
+switches.
+
 \begin{center}
-  \includegraphics[scale=.28]{edificioP.png}
+  \includegraphics[scale=.28]{nuevoP.png}
 \end{center}
 
 \subsubsection{Inventario}
@@ -97,19 +103,53 @@ la siguiente tabla no fue hecha con datos reales.
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{| c | c | c | c | c | c | c | c |}\hline
-    0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
-    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-    1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
-    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\ \hline
-    0 & 1 & 0 & 0 & 1 & 0 & 0 & 0 \\ \hline
+  \begin{tabular}{| c | c | c | c | c |}\hline
+    Equipo & IPs & Máscara de red & Gateway & VLAN \\ \hline
+    Switch10 & -----  & ----- & ----- & 10 \\ \hline 
+    Switch102& -----  & ----- & ----- & 10 \\ \hline
+    Switch103& -----  & ----- & ----- & 10 \\ \hline
+    Switch104& -----  & ----- & ----- & 10 \\ \hline
+    Switch11 & -----  & ----- & ----- & 11 \\ \hline
+    Switch111& -----  & ----- & ----- & 11 \\ \hline
+    Switch113& -----  & ----- & ----- & 11 \\ \hline
+    Switch12 & -----  & ----- & ----- & 12 \\ \hline
+    Switch112& -----  & ----- & ----- & 12 \\ \hline
+    Switch123& -----  & ----- & ----- & 12 \\ \hline
+    PC10A  & 192.168.10.8  & 255.255.255.0 & 192.168.10.2 & 10  \\ \hline
+    PC10A1 & 192.168.10.9  & 255.255.255.0 & 192.168.10.2 & 10 \\ \hline
+    PC10C  & 192.168.10.10 & 255.255.255.0 & 192.168.10.2 & 10 \\ \hline
+    PC11A  & 192.168.11.8  & 255.255.255.0 & 192.168.11.2 & 11 \\ \hline
+    PC11B  & 192.168.11.9  & 255.255.255.0 & 192.168.11.2 & 11 \\ \hline
+    PC11C  & 192.168.11.10 & 255.255.255.0 & 192.168.11.2 & 11 \\ \hline
+    PC11D  & 192.168.11.11 & 255.255.255.0 & 192.168.11.2 & 11 \\ \hline
+    PC11E  & 192.168.11.12 & 255.255.255.0 & 192.168.11.2 & 11 \\ \hline
+    PC12A  & 192.168.12.8  & 255.255.255.0 & 192.168.12.2 & 12 \\ \hline
+    PC12B  & 192.168.12.9  & 255.255.255.0 & 192.168.12.2 & 12 \\ \hline
+    PC12C  & 192.168.12.10 & 255.255.255.0 & 192.168.12.2 & 12 \\ \hline
+    PC12D  & 192.168.12.11 & 255.255.255.0 & 192.168.12.2 & 12 \\ \hline
+    PC12E  & 192.168.12.12 & 255.255.255.0 & 192.168.12.2 & 12 \\ \hline
+    Laptop10B  & 192.168.10.11 & 255.255.255.0 & 192.168.10.2 & 10 \\ \hline
+    Laptop10B1  & 192.168.10.12 & 255.255.255.0 & 192.168.10.2 & 10 \\ \hline
+    Laptop10C  & 192.168.10.13 & 255.255.255.0 & 192.168.10.2 & 10 \\ \hline
   \end{tabular}
-  \caption{Inventario .}
+  \caption{Inventario de direcciones IP.}
 \end{table}
 
 
 \subsubsection{Tabla de rutas}
+%% https://www.youtube.com/watch?v=VbRRWTMh1GA quizá ayude
 
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{| c | c | c | c | c |}\hline
+    Equipo & IPs & Máscara de red & Gateway & VLAN \\ \hline
+    Router0 & 192.0.2.0/24 & ----- & 10 & \\
+    & 198.51.100.0/24 & ----- &  & \\
+    & 203.0.113.0/24 & ----- &  & \\\hline
+  \end{tabular}
+  \caption{Tabla de rutas del router.}
+\end{table}
 \section{Parte práctica}
 \subsection{Considerar una red de la siguiente forma}
 \begin{center}
@@ -123,9 +163,9 @@ Llevar a cabo lo siguiente:
   %% https://www.youtube.com/watch?v=H74s4_oJNYY
   Recordemos los rangos de direcciones para utilizar con redes privadas:
   \begin{itemize}
-  \item Clase A: 10.0.0.0 a 10.255.255.255 
-  \item Clase B: 172.16.0.0 a 172.31.255.255
-  \item Clase C: 192.168.0.0 a 192.168.255.255
+  \item Clase A: 0.0.0.0 a 127.255.255.255
+  \item Clase B: 128.0.0.0 a 191.255.255.255
+  \item Clase C: 192.0.0.0 a 223.255.255.255
   \end{itemize}
 
   Recordemos también lo que hace el comando \texttt{ifcfg: simplistic script

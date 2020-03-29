@@ -1,19 +1,20 @@
 
 1. [-] Tarea de Redes
    1. [-] Parte teórica
-      1. [-] Memoria fotográfica
+      1. [X] Memoria fotográfica
          1. [X] Edificio
-         2. [ ] Inventario
-         3. [ ] tabla de rutas
-      2. [ ] Conexión de dispositivos
-         1. [ ] 
-         2. [ ] 
+         2. [X] Inventario
+         3. [X] tabla de rutas
+      2. [-] Conexión de dispositivos
+         1. [X] 
+         2. [X] 
          3. [ ] 
-         4. [ ] 
-         5. [ ] 
-         6. [ ] 
-         7. [ ] 
-      3. [ ] extra
+         4. [X] 
+         5. [X] 
+         6. [X] 
+         7. [X] 
+      3. [X] Consideraciones
+      4. [ ] extra
    2. [-] Parte práctica
       1. [-] Considera una red..
          1. [X] 
