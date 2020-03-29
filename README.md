@@ -29,7 +29,7 @@ de la red, por dónde entra o sale el tráfico de la red en cuestión.
 ordenadores.
 
 Reference-style: 
-![alt text](https://github.com/mildewyPrawn/nuevoP.png "Diagrama")
+![alt text](https://github.com/mildewyPrawn/redes/blob/master/nuevoP.png "Diagrama")
 
 Inventario
 ----------
