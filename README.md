@@ -28,7 +28,6 @@ de la red, por dónde entra o sale el tráfico de la red en cuestión.
 **Ruteador** Dispositivo empleado a la hora de la interconexión de una red de
 ordenadores.
 
-Reference-style: 
 ![alt text](https://github.com/mildewyPrawn/redes/blob/master/nuevoP.png "Diagrama")
 
 Inventario
@@ -69,7 +68,7 @@ Tabla de rutas
 |Equipo | IPs | Máscara de red | Gateway | VLAN |
 | ----- |:---:|:--------------:|:--------| ----:|
 |Router0 | 192.0.2.0/24 | ----- | 10 |
-| 198.51.100.0/24 | ----- |  |
-| 203.0.113.0/24 | ----- |  |
+|| 198.51.100.0/24 | ----- |  |
+|| 203.0.113.0/24 | ----- |  |
 
 
