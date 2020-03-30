@@ -41,7 +41,7 @@ switches.
 
 ![alt text](https://github.com/mildewyPrawn/redes/blob/master/rackP.png "Rack")
 
-![alt text](https://github.com/mildewyPrawn/redes/blob/master/nuevoP.png "Diagrama")
+![alt text](https://github.com/mildewyPrawn/redes/blob/master/nuevoPP.png "Diagrama")
 
 Inventario
 ----------
