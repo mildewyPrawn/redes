@@ -1,5 +1,5 @@
 
-1. [-] Tarea de Redes
+1. [X] Tarea de Redes
    1. [X] Parte teórica
       1. [X] Memoria fotográfica
          1. [X] Edificio
@@ -15,38 +15,90 @@
          7. [X] 
       3. [X] Consideraciones
       4. [X] extra
-   2. [-] Parte práctica
-      1. [-] Considera una red..
+   2. [X] Parte práctica
+      1. [X] Considera una red..
          1. [X] 
          2. [X] 
-         3. [ ] 
+         3. [X] 
          4. [X] 
          5. [X] 
-         6. [ ] 
-         7. [ ] 
-         8. [ ] 
-         9. [ ] 
-         10. [ ] 
-         11. [ ] 
-             1. [ ] 
-             2. [ ] 
-             3. [ ] 
-             4. [ ] 
-             5. [ ] 
-             6. [ ] 
-             7. [ ] 
-             8. [ ] 
+         6. [X] 
+         7. [X] 
+         8. [X] 
+         9. [X] 
+         10. [X] 
+         11. [X] 
+             1. [X] 
+             2. [X] 
+             3. [X] 
+             4. [X] 
+             5. [X] 
+             6. [X] 
+             7. [X] 
+             8. [X] 
       2. [X] detección o corrección de errores
          1. [X] a
          2. [X] b
          3. [X] c
       3. [X] WWW
       4. [X] CRC
-      5. [-] Extra
+      5. [X] Extra
          1. [X] A
-         2. [ ] B
-   3. [ ] Extras
-      1. [ ] hacer el diagrama del rack
+         2. [X] B
+   3. [X] Extras
+      1. [X] hacer el diagrama del rack
+
+
+conectarse (ültimo inciso)
+
+Cesar.eldelfino.local (servicio alojado en servervidor)
+va a ir al AP y va a preguntar primero al DNS ¿Conoces este dominio?
+
+
+DNS -> ip de dom -> regresa a PC ->  AP  -> GW -> router -> ip
+
+
+
+enable
+conf t
+ip default-gateway [ip]
+interface fa0/1
+switchport mode access
+interface fa0/12
+switchport mode access
+exit
+
+wr
+
+
+
+enable
+conf t
+intetface g0/1
+switchport mode trunk
+exit
+exit
+
+
+
+ena conf t
+vlan 10
+end
+vlan 10
+name planta_baja
+end
+conf t
+int fa0/1
+switchport mode access
+switchport access vlan10
+end
+
+enable 
+conf t
+int fa0/5
+switchport access vlan20**
+
+prender puerto del switch (Darle no shutdown)
 
 
 

@@ -164,81 +164,225 @@ la siguiente tabla no fue hecha con datos reales.
   \includegraphics[scale=.75]{red.png}
 \end{center}
 Llevar a cabo lo siguiente:
+
+  Recordemos lo siguiente:
+  \begin{itemize}
+  \item Clase A: 0.0.0.0 hasta 127.255.255.255
+  \item Clase B: 128.0.0.0 hasta 191.255.255.255
+  \item Clase C: 192.0.0.0 hasta 223.255.255.255
+  \end{itemize}
+  
 \begin{itemize}
+  
 \item Asignar direcciones de un \textit{segmento privado de clase B} a los
   equipos de la Red A.
 
-  %% https://www.youtube.com/watch?v=H74s4_oJNYY
-  Recordemos los rangos de direcciones para utilizar con redes privadas:
-  \begin{itemize}
-  \item Clase A: 0.0.0.0 a 127.255.255.255
-  \item Clase B: 128.0.0.0 a 191.255.255.255
-  \item Clase C: 192.0.0.0 a 223.255.255.255
-  \end{itemize}
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c | c |}\hline
+      Nombre & Asignación     \\ \hline
+      PC(up) & 172.16.0.3     \\ \hline
+      PC(down) & 172.16.1.2   \\ \hline    
+      AP & 172.16.1.1         \\ \hline
+      Switch & 172.16.0.2     \\ \hline
+    \end{tabular}
+  \end{table}
 
-  Recordemos también lo que hace el comando \texttt{ifcfg: simplistic script
-    which replaces ifconfig IP management}, es una manera más simple de usar
-  \texttt{ifconfig}, que nos permite cambiar las direcciones.
-
-  La interfaz que vamos a cambiar es \texttt{eth1}.
-
-  Primero, necesitamos quitar la IP que tiene asignada en este momento. con el
-  siguiente comando \texttt{ifcfg eth1 inet 0.0.0.0 down}. Una vez hecho esto,
-  nuestra interfaz está abajo y podemos asginar otra dirección única como sigue:
-  \texttt{ifcfg eht1 inet xxx.x.x.x netmask xxx.xxx.xxx.x up}, con esto, solo
-  bastaría agregar las direcciones que se quieran. Hay que hacer este
-  pifcfg eth1 inet 0.0.0.0 down.
-  procedimiento para todos los equipos de la Red A.
-
-  Como son pocos los equipos, podemos hacerlo de uno por uno, pero si fueran
-  varios podríamos hacer uso de \texttt{DHCP}.
 \item Establecer la dirección del \textit{gateway} en la Red A.
-  
-  %% https://www.cisco.com/c/es_mx/support/docs/ip/routing-information-protocol-rip/16448-default.html
-  \texttt{ip default-gateway xxx.xx.xx.x}, donde xxx.xx.xx.x es la dirección que
-  se quiere establecer.
+
+  Getaway : 172.16.0.1
   
 \item Indica la configuración de red que se debe usar en los equipos de la Red A
   (\textit{dirección de red, gateway, máscara de subred} y otros que consideres
   necesarios).
 
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c |}\hline
+      Dispositivo & Nombre & Asignación\\ \hline
+      PC(up) & & \\ \hline
+      & Dirección de red & 172.16.0.3 \\ \hline
+      & Getaway & 172.16.0.2 \\ \hline
+      & Máscara de sub red & 255.255.0.0 \\ \hline
+    \end{tabular}
+  \end{table}
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c |}\hline
+      Dispositivo & Nombre & Asignación\\ \hline
+      Switch & & \\ \hline
+      & Dirección de red & 172.16.0.2 \\ \hline
+      & Getaway & 172.16.0.1 \\ \hline
+      & Máscara de sub red & 255.255.0.0 \\ \hline
+    \end{tabular}
+  \end{table}
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c |}\hline
+      Dispositivo & Nombre & Asignación\\ \hline
+      AP & & \\ \hline
+      & Getaway & 172.16.0.2 \\ \hline
+      & Máscara de sub red & 255.255.0.0 \\ \hline
+      & IP-WAN & 172.16.1.1 \\ \hline
+      & IP-LAN & 172.16.2.2 \\ \hline
+    \end{tabular}
+  \end{table}
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c |}\hline
+      Dispositivo & Nombre & Asignación\\ \hline
+      PC(down) & & \\ \hline
+      & Dirección de red & 172.16.1.2 \\ \hline
+      & Getaway & 172.16.0.2 \\ \hline
+      & Máscara de sub red & 255.255.0.0 \\ \hline
+    \end{tabular}
+  \end{table}
+
 \item Hacer uso de un \textit{segmento de red público de clase C} en los equipos
   de la Red B.
 
-  Al igual que en inciso anterior, esta es la clase que nos interesa  Clase C:
-  192.168.0.0 a 192.168.255.255, y usando el mismo comando (\texttt{ifcfg}) y la
-  misma idea, procederíamos a cambiar el segmento desactivando la interfaz que se
-  requiera, asignando el nuevo segmento, y finalmente levantarlo (\texttt{up}).
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|c | c |}\hline
+      Nombre & Asignación \\ \hline
+      Switch & 192.0.0.2  \\ \hline
+      Server & 192.0.0.3   \\ \hline   
+    \end{tabular}
+  \end{table}
   
 \item Establecer la dirección del \textit{gateway} en la Red B.
 
-  Igual que en el inciso anterior, hacemos uso del siguiente comando: \texttt{
-  ip default-gateway xxx.xx.xx.x}.
+  Getaway : 192.0.0.1
   
 \item Indica la configuración de red que se debe usar en el servidor de la Red B
   (\textit{dirección de red, gateway, máscara de subred} y otros que consideres
   necesarios).
   
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c |}\hline
+      Dispositivo & Nombre & Asignación\\ \hline
+      Switch & & \\ \hline
+      & Dirección de red & 192.0.0.2 \\ \hline
+      & Getaway & 192.0.0.1 \\ \hline
+      & Máscara de sub red & 255.255.255.0 \\ \hline
+    \end{tabular}
+  \end{table}
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c | c |}\hline
+      Dispositivo & Nombre & Asignación\\ \hline
+      Server & & \\ \hline
+      & Dirección de red & 192.0.0.3 \\ \hline
+      & Getaway & 192.0.0.1 \\ \hline
+      & Máscara de sub red & 255.255.255.0 \\ \hline
+    \end{tabular}
+  \end{table}
+  
 \item Asignar una \textit{dirección de red} a las interfaces correspondientes del
   \textit{router}, de acuerdo a las redes conectadas.
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c |}\hline
+      RED & Dirección \\ \hline
+      A & 172.16.0.1\\ \hline
+      B & 192.0.0.1 \\ \hline
+    \end{tabular}
+  \end{table}  
   
 \item Incluir en el diagrama un \textit{DNS} en una red independiente, haciendo
   uso de un segmento de \textit{red de clase C}, con direcciones públicas.
+
+Haciendo uso del segmento de clase 192.0.0.0/24, tenemos lo siguiente:
+  
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c |}\hline
+      Nombre & Dirección \\ \hline
+      google.com & 192.0.0.1 \\ \hline
+      facebook.com & 192.0.0.2 \\ \hline
+      youtube.com & 192.0.0.3 \\ \hline
+      twitter.com & 192.0.0.4 \\ \hline
+      instagram.com & 192.0.0.5 \\ \hline
+    \end{tabular}
+  \end{table}
+
+  Por lo que el diagrama se vería de la siguiente manera:
+
+  \begin{center}
+  \includegraphics[scale=.75]{DNS.png}
+\end{center}  
   
 \item Considerando que todos los clientes y servidores involucrados son equipos
   Linux, indica la forma en la que se debe establecer la configuración de
   \textit{red estática} y la configuración necesaria para llevar a cabo la
   \textit{resolución de nombres} en el sistema (archivos y comandos necesarios).
+
+  Existen dos maneras de hacerlo, de forma persistente y por la sesión.
+
+  \begin{itemize}
+  \item Persistente:
+    \begin{enumerate}
+    \item El archivo a utilizar: \texttt{/etc/network/interfaces}
+    \item \texttt{auto [interfaz]} configurar que las interfaces se configuren al
+      inicio del sistema.
+    \item \texttt{iface [interfaz] inet static} para configurarla estáticamente.
+    \item Escribimos los siguientes datos con las direcciones necesarias, en caso
+      de no tener algún dato, se puede comentar o no poner:
+      \begin{itemize}
+      \item \texttt{adreess [dirección]}
+      \item \texttt{netmask [máscara]}
+      \item \texttt{network [red de pertenencia]}
+      \item \texttt{broadcast [dirección de broadcast]}
+      \item \texttt{gateway [gateway a tomar]}
+      \end{itemize}
+    \item Podemos aplicar los cambios a todas las interfaces disponibles o, como
+      solamente editamos una, hacemos lo siguiente: \texttt{ifdown [intefaz];
+        ifup [interfaz]}
+    \item \texttt{ifconfig -a} para ver los cambios.
+    \end{enumerate}
+  \item Sesión:
+    \begin{enumerate}
+    \item \texttt{ifconfig -a} nos da la información de todas las interfaces de
+      red.
+    \item Seleccionamos la interfaz que queramos configurar.
+    \item \texttt{ifconfig [interfaz] inet 0.0.0.0 down}, quitamos ip y bajamos
+      la interfaz (No hacerla disponible para conexiones).
+    \item \texttt{ifconfig} muestra todas las interfaces que están arriba.
+    \item \texttt{ifconfig [interfaz] inet [dirección] netmask [máscaa] up} con
+      esto configuramos otra dirección ip.
+    \item \texttt{ifconfig [interfaz]} para verificar lo que hicimos.
+    \end{enumerate}
+  \end{itemize}
   
 \item Por cuestiones de simplicidad, asignar a cada dispositivo  una
   \textit{dirección física de 4 números hexadecimales}.
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{| c | c |}\hline
+      Nombre & Dirección \\ \hline
+      PC(up) & 53-34-1A-45-59-4C \\ \hline
+      PC(down) & 29-D3-C2-4D-1F-21 \\ \hline
+      Switch(A) & 2E-DD-8E-4B-F9-B1 \\ \hline
+      AP & AD-F8-EF-E9-BD-A4 \\ \hline
+      Gateway & 11-C4-6E-C5-83-02 \\ \hline
+      Router & 95-73-E3-A7-9B-35 \\ \hline
+      Switch(B) & 0F-49-AD-EB-13-06 \\ \hline
+      Server & 91-73-35-CA-C9-8C \\ \hline
+    \end{tabular}
+  \end{table}  
   
 \item Explicar con detalle el procedimiento para llevar a cabo la conexión entre
   una computadora de la Red A al servidor de la Red B, considerando lo siguiente:
   \begin{itemize}
   \item Se debe establecer el nombre del servidor con base en tu nombre y
-    apellidos.
-    
+    apellidos.    
     jose-luis.torres.local o juan.camacho.local
   \item El servidor de la Red B cuenta con una aplicación de "servidor Web" el
     cual solamente acepta peticiones mediante \textit{HTTP} version 1.1 en el
@@ -262,6 +406,23 @@ Llevar a cabo lo siguiente:
     llegar al \textit{router} y la forma en la que se vuelven ``encapsular'' para
     su reenvío.
   \end{itemize}
+
+  \begin{enumerate}
+  \item angel-gladin-emiliano-galeana.local quiere conectarse al servidor con
+    dirección \texttt{192.0.0.3}.
+  \item La computadora (PC(down)), pregunta al DNS en el AP si conoce la
+    dirección, como no la conoce.
+  \item El AP, le pregunta al Switch si conoce la dirección.
+  \item El Switch le pregunta al Gateway (Todo esto, porque nadie ha conocido la
+    dirección final).
+  \item El Gateway le pergunta al Router, y este, le dice que lo puede redirigir
+    a donde cree que podría estar la dirección.
+  \item Entra al Switch(B) y le pregunta si conoce la dirección, este dice que si
+    y se conecta con el Servidor.
+  \item Se verifica que el puerto 54321 esté habilitado para aceptar peticiones.
+  \item Se regresan señales para indicarle a angel-gladin-emiliano-galeana.local
+    que se estableció una conexión.
+  \end{enumerate}
 \end{itemize}
 
 \subsection{Explicar cuáles son las características que debe tener un código para
