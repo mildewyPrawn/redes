@@ -18,15 +18,28 @@ redes de distribución, hasta las instalaciones del usuario.
 **Cuarto de telecomunicaciones** Área que es utilizada para el uso exclusivo de
 equipo asociado  con el sistema de cableado de telecomunicaciones.
 
-**Racks** Racks de cada cuarto (Incluyendo Patch Panels) Estructura que permite
-sostener un dispositivo tecnológico. Tenemos en el cuarto de telecomunicaciones, 
-y en los acces points de cada piso.
+**Racks** Racks de cada cuarto (Incluyendo Patch Panels) Estructura que
+permite sostener un dispositivo tecnológico. Tenemos en el cuarto de
+telecomunicaciones, y en los acces points de cada piso. El diagrama de packet
+tracer muestra solo una columna, la configuración del rack, se encuentra abajo.
+El diagrama, supone distintos pisos.
 
 **Switches** Switches de acceso, distribución y core. Representan el perímetro
 de la red, por dónde entra o sale el tráfico de la red en cuestión.
 
 **Ruteador** Dispositivo empleado a la hora de la interconexión de una red de
 ordenadores.
+
+El siguiente diagrama representa al edificio P, con algunas modificaciones para
+poder hacer ejemplos más claros.
+
+Los cuadrados chiquitos que engloban computadoras, represenatan salones, y los
+rectángulos horizontales, representan los pisos del edificio.
+
+Para las VLAN, se usararon las configuraciones desde el \texttt{CLI} de los
+switches.
+
+![alt text](https://github.com/mildewyPrawn/redes/blob/master/rackP.png "Rack")
 
 ![alt text](https://github.com/mildewyPrawn/redes/blob/master/nuevoP.png "Diagrama")
 
@@ -68,7 +81,5 @@ Tabla de rutas
 |Equipo | IPs | Máscara de red | Gateway | VLAN |
 | ----- |:---:|:--------------:|:--------| ----:|
 |Router0 | 192.0.2.0/24 | ----- | 10 |
-|| 198.51.100.0/24 | ----- |  |
-|| 203.0.113.0/24 | ----- |  |
-
-
+| | 198.51.100.0/24 | ----- |  |
+| | 203.0.113.0/24 | ----- |  |
